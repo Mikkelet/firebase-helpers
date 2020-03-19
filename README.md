@@ -9,8 +9,8 @@ const docs = snap.docs
 const batch = new BatchBulk()
 for(const doc of docs){
   const newData = {}
-  await batch.set(doc.ref, newData)
-  await batch.update(doc.ref, newData)
+  batch.set(doc.ref, newData)
+  batch.update(doc.ref, newData)
   // etc...
 }
 
