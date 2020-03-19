@@ -3,8 +3,7 @@ a list of small tools for managing a firebase backend
 
 batch_bulk.ts:
 
-``
-const snap = await collection("mycollection").get();
+``const snap = await collection("mycollection").get();
 
 const docs = snap.docs
 
@@ -22,6 +21,4 @@ for(const doc of docs){
   
 }
 
-await batch.commit()
-
-``
+await batch.commit()``
