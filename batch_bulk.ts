@@ -21,7 +21,7 @@ export default class BatchInstance {
      * @param doc Docuement to be set
      * @param data Data to be applied
      */
-    async set(doc: firebase.firestore.DocumentReference, data: any) {
+    set(doc: firebase.firestore.DocumentReference, data: any) {
         this._batch.set(doc, data);
         this._size++;
         this.addBatchIfFull()
@@ -30,7 +30,7 @@ export default class BatchInstance {
      * Delete a document
      * @param doc document to be deleted
      */
-    async delete(doc: firebase.firestore.DocumentReference) {
+    delete(doc: firebase.firestore.DocumentReference) {
         this._batch.delete(doc)
         this._size++;
         this.addBatchIfFull()
@@ -40,7 +40,7 @@ export default class BatchInstance {
      * @param doc what doc to update
      * @param data the data that needs updating
      */
-    async update(doc: firebase.firestore.DocumentReference, data: any) {
+    update(doc: firebase.firestore.DocumentReference, data: any) {
         this._batch.update(doc, data);
         this._size++;
         this.addBatchIfFull();
