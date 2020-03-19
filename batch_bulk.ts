@@ -1,7 +1,7 @@
 import * as firebase from 'firebase-admin'
 const fs = firebase.firestore();
 
-// https://github.com/Mikkelet/firebase-helpers/
+// https://github.com/Mikkelet/firebase-helpers/blob/master/batch_bulk.ts
 
 
 export default class BatchBulk {
