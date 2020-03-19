@@ -4,7 +4,7 @@ const fs = firebase.firestore();
 // https://github.com/Mikkelet/firebase-helpers/blob/master/batch_bulk.ts
 
 
-export default class BatchBulk {
+export default class BatchInstance {
     private _batch: firebase.firestore.WriteBatch;
     private _size = 0;
     private _batches: firebase.firestore.WriteBatch[];
@@ -24,7 +24,7 @@ export default class BatchBulk {
     async set(doc: firebase.firestore.DocumentReference, data: any) {
         this._batch.set(doc, data);
         this._size++;
-        await this.commitIfFull()
+        this.addBatchIfFull()
     }
     /**
      * Delete a document
@@ -33,7 +33,7 @@ export default class BatchBulk {
     async delete(doc: firebase.firestore.DocumentReference) {
         this._batch.delete(doc)
         this._size++;
-        await this.commitIfFull()
+        this.addBatchIfFull()
     }
     /**
      * Apply an update to a document. The document MUST exist or the entire batch fails.
@@ -43,9 +43,9 @@ export default class BatchBulk {
     async update(doc: firebase.firestore.DocumentReference, data: any) {
         this._batch.update(doc, data);
         this._size++;
-        await this.commitIfFull();
+        this.addBatchIfFull();
     }
-    private async commitIfFull() {
+    private addBatchIfFull() {
         if (this._size < 500) return;
         this._batches.push(this._batch);
         this.resetBatch()
@@ -76,7 +76,7 @@ export default class BatchBulk {
         this._batches = [];
         this.resetBatch()
     }
-
+    
     private resetBatch() {
         this._size = 0;
         this._batch = fs.batch();
